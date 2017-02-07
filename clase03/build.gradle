@@ -1,0 +1,44 @@
+
+/*   se ejecuta esto para gradle    **/
+buildscript {
+	ext {// aqui se define variables
+		springBootVersion = '1.5.1.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		// transitive ....
+		// tmb se pude exlucir artefectos (jars)
+	}
+}
+
+
+/** la parte de abjao es para el projecto**/
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'idea'
+
+jar { // el plugin q genera el jar toma estos valores 
+	baseName = 'clase03'
+	version = '0.0.1-SNAPSHOT'
+}
+
+sourceCompatibility = 1.8
+
+repositories {
+	jcenter() // se añadio este codigo ---- se recomienda usar este repo
+	mavenCentral()
+}
+
+
+dependencies {
+	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+	compile('org.springframework.boot:spring-boot-starter-hateoas')
+	compile('org.springframework.boot:spring-boot-starter-web')
+	runtime('com.h2database:h2')
+	compileOnly('org.projectlombok:lombok')
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+}
